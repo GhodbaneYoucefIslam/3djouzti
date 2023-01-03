@@ -1,0 +1,269 @@
+/* navbar  */
+nav .container-fluid{
+    padding: 1% 7%;
+}
+.navbar-brand{
+    margin-right: 5%;
+}
+
+/* diaporama */
+
+#diaporama .container-fluid{
+    padding: 5% 0% 1%;
+}
+
+.carousel-indicators button[data-bs-target]{
+    background-color: black;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+}
+
+
+.carousel-item{
+    height: 500px;
+}
+
+/* zone de contenue */
+#zone-de-contenu .container-fluid{
+    padding: 1% 7%;
+}
+
+.recipie-card{
+    width: 18rem;
+}
+
+h1{
+    margin: 5%;
+}
+
+.nav-tabs{
+    background-color: rgb(200, 205, 209);
+}
+
+#zone-de-contenu .nav-link{
+    font-size:xx-large;
+    font-weight: bold;
+    color: black;
+}
+.categorie-icon{
+    margin: 3%;
+}
+
+#buttonHolder{
+    text-align: center;
+    margin: 7%
+}
+
+#buttonHolder i{
+    margin-left: 10px;
+}
+
+/*pied de page*/
+
+footer .container-fluid{
+    padding: 1% 7%;
+    display: flex;
+    justify-content: space-around;
+    background-color: beige;
+}
+
+
+/*page de recette*/
+#recipie-container{
+    margin-top: 7%;
+    padding: 2% 10%;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1.5px 5px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1%;
+}
+#recipie-title-container{
+    text-align: center;
+}
+
+#recipie-title-container h1{
+    margin: 0;
+}
+
+.recipie-page-img{
+    width: 100%;
+    aspect-ratio: 640 / 486;
+    border-radius: 25px;
+}
+
+.recipie-nutrition-info{
+    display: inline-block;
+    width: 20%;
+    height: fit-content;
+    margin: auto 0 auto 0;
+    padding: 0;
+}
+
+#recipie-info{
+    margin-top: 2%;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+}
+#recipie-info i{
+    margin-right:10px;
+}
+
+
+/*ingrediants*/
+
+
+#line-separator h4{
+    display: inline;
+    margin-right: 2%;
+}
+
+#line-separator hr{
+    display: inline-block;
+    width: 70%;
+    color: #000;
+    margin: auto 0 auto 0;
+    height: 1px;
+}
+#line-separator i{
+    margin: 1%;
+}
+
+#line-separator{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.ingrediant-img-square{
+    color: #000;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 15px;
+    box-shadow: rgb(0 0 0 / 13%) 1px 2px 9px 0px;
+    width: fit-content;
+}
+.ingrediant-square{
+    text-align: center;
+    display: inline-block;
+    margin: 0 2%;
+}
+
+/*preparation*/
+#time-info{
+    text-align: center;
+    background-color: rgb(239, 239, 239);
+    padding: 1% 0% 0;
+    border-radius: 15px;
+    width: 65%;
+    margin: 0 auto 0 auto;
+}
+#time-info h6{
+    display: inline;
+}
+
+#time-items{
+    padding: 1% 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*etape de preparation*/
+
+#step-list{
+margin: 5% 0 0
+}
+
+#step-list li{
+    margin: 5% 0;
+}
+
+#video h2{
+    margin-bottom: 4rem;
+}
+
+
+/*page de catégorie*/
+#sort-and-filter{
+    padding: 5% 5% 0;
+}
+#Specialhr{
+   transform: rotate(90deg);
+   width: 10%;
+   position: relative;
+   top: 50%
+}
+
+/*idées de recettes-------------------------------------------*/
+.find-ingrediant-btn{
+   padding: 14px 45px 12px 45px;
+}
+
+
+/*liste des ingrediant choisis*/
+#liste-des-ingrediant-title{
+    text-align: center;
+}
+
+.supprimer-ingrediant-btn{
+    margin-left: 3rem;
+    color: #000;
+}
+#liste-des-ingrediants li{
+padding: 1%;
+margin: 1%;
+display: flex;
+justify-content: space-between;
+}
+#trouver-recettes-div{
+    position: relative;
+}
+#trouver-recettes-btn{
+    position: absolute;
+    right: 0;
+}
+  
+/* The search field */
+#myInput {
+box-sizing: border-box;
+background-position: 14px 12px;
+background-repeat: no-repeat;
+font-size: 16px;
+padding: 14px 20px 12px 45px;
+border: none;
+border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f6f6f6;
+min-width: 230px;
+border: 1px solid #ddd;
+z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+/*idées de recettes-------------------------------------------*/
