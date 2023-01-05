@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS `Recipie`(
     `TitleRecipie` VARCHAR(20) NOT NULL UNIQUE,
     `DescriptionRecipie` TEXT(1000),
     `Category` VARCHAR(50) NOT NULL,
-    `PrepTime` TIME,
-    `CookTime` TIME,
-    `RestTime` TIME,
+    `PrepTime` INT(10),
+    `CookTime` INT(10),
+    `RestTime` INT(10),
     `Difficulty` VARCHAR(10),
     `CaloriesRecipie` SMALLINT(10),
     `Rating` TINYINT(5),
@@ -24,9 +24,10 @@ CREATE TABLE IF NOT EXISTS `Ingredient`(
     `Season` VARCHAR(50),
     `IsHealthy` BOOLEAN,
     `CaloriesIngredient` SMALLINT(10),
-    `TotalFat` SMALLINT(10),
-    `TotalProtien` SMALLINT(10),
-    `TotalCarbs` SMALLINT(10)
+    `TotalFat` FLOAT(10),
+    `TotalProtien` FLOAT(10),
+    `TotalCarbs` FLOAT(10),
+    `WeightOfOne` SMALLINT(10)
 );
 
 DROP TABLE IF EXISTS `Step`;
@@ -56,7 +57,6 @@ DROP TABLE IF EXISTS `CookingMethod`;
 CREATE TABLE IF NOT EXISTS `CookingMethod`(
     `IDCookingMethod` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `NameCookingMethod` VARCHAR(20) NOT NULL UNIQUE,
-    `Type` VARCHAR(20),
     `IsHealthy` BOOLEAN
 );
 
@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS `IngredientInRecipie`;
 CREATE TABLE IF NOT EXISTS `IngredientInRecipie`(
     `IDRecipie` INT(10) NOT NULL,
     `IDIngredient` INT(10) NOT NULL,
-    `Quanitity` SMALLINT(10),
+    `Quanitity` FLOAT(10),
     `Unit` VARCHAR(10),
     PRIMARY KEY(`IDRecipie`,`IDIngredient`),
     FOREIGN KEY(`IDRecipie`) REFERENCES `Recipe`(`IDRecipie`),
@@ -137,5 +137,23 @@ CREATE TABLE IF NOT EXISTS `CookingMethodInRecipie`(
     PRIMARY KEY(`IDUser`,`IDRecipie`),
     FOREIGN KEY(`IDRecipie`) REFERENCES `Recipe`(`IDRecipie`),
     FOREIGN KEY(`IDUser`) REFERENCES `User`(`IDUser`)
+);
+
+DROP TABLE IF EXISTS `News`;
+CREATE TABLE IF NOT EXISTS `News`(
+    `IDNews` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `TitleNews` VARCHAR(20) NOT NULL UNIQUE,
+    `DescriptionNews` TEXT(1000),
+    `ImageLinkNews` VARCHAR(100),
+    `VideoLinkNews` VARCHAR(100)
+);
+
+DROP TABLE IF EXISTS `Diaporama`;
+CREATE TABLE IF NOT EXISTS `Diaporama`(
+    `IDDiaporama` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `TitleDiaporama` VARCHAR(20) NOT NULL UNIQUE,
+    `DescriptionDiaporama` TEXT(1000),
+    `IsNews` BOOLEAN NOT NULL, 
+    `IDNewsOrRecipie` VARCHAR(100) NOT NULL
 );
 
