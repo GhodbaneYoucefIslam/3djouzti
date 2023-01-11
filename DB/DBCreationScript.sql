@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `Recipie`;
 CREATE TABLE IF NOT EXISTS `Recipie`(
     `IDRecipie` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `TitleRecipie` VARCHAR(20) NOT NULL UNIQUE,
+    `TitleRecipie` VARCHAR(100) NOT NULL UNIQUE,
     `DescriptionRecipie` TEXT(1000),
     `Category` VARCHAR(50) NOT NULL,
     `PrepTime` INT(10),
@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS `Recipie`(
     `RestTime` INT(10),
     `Difficulty` VARCHAR(10),
     `CaloriesRecipie` SMALLINT(10),
+    `TotalFatRecipie` FLOAT(10),
+    `TotalProtienRecipie` FLOAT(10),
+    `TotalCarbsRecipie` FLOAT(10),
     `Rating` TINYINT(5),
     `VideoLink` VARCHAR(100),
     `NumberOfServings` TINYINT(5),
@@ -16,17 +19,18 @@ CREATE TABLE IF NOT EXISTS `Recipie`(
     `IsApproved` BOOLEAN NOT NULL
 );
 
+
 DROP TABLE IF EXISTS `Ingredient`;
 CREATE TABLE IF NOT EXISTS `Ingredient`(
     `IDIngredient` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `NameIngredient` VARCHAR(20) NOT NULL UNIQUE,
+    `NameIngredient` VARCHAR(20),
     `CategoryIngredient` VARCHAR(50),
     `Season` VARCHAR(50),
     `IsHealthy` BOOLEAN,
     `CaloriesIngredient` SMALLINT(10),
-    `TotalFat` FLOAT(10),
-    `TotalProtien` FLOAT(10),
-    `TotalCarbs` FLOAT(10),
+    `TotalFatIngredient` FLOAT(10),
+    `TotalProtienIngredient` FLOAT(10),
+    `TotalCarbsIngredient` FLOAT(10),
     `WeightOfOne` SMALLINT(10)
 );
 
@@ -35,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `Step`(
     `IDStep` INT(10) NOT NULL AUTO_INCREMENT,
     `DescriptionStep` TEXT(1000) NOT NULL,
     `IDRecipie` INT(10) NOT NULL,
-    `Order` SMALLINT(10),
+    `StepOrder` SMALLINT(10),
     PRIMARY KEY(`IDRecipie`,`IDStep`),
     FOREIGN KEY(`IDRecipie`) REFERENCES `Recipe`(`IDRecipie`)
 );
@@ -86,7 +90,7 @@ DROP TABLE IF EXISTS `IngredientInRecipie`;
 CREATE TABLE IF NOT EXISTS `IngredientInRecipie`(
     `IDRecipie` INT(10) NOT NULL,
     `IDIngredient` INT(10) NOT NULL,
-    `Quanitity` FLOAT(10),
+    `Quantity` FLOAT(10),
     `Unit` VARCHAR(10),
     PRIMARY KEY(`IDRecipie`,`IDIngredient`),
     FOREIGN KEY(`IDRecipie`) REFERENCES `Recipe`(`IDRecipie`),
@@ -142,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `CookingMethodInRecipie`(
 DROP TABLE IF EXISTS `News`;
 CREATE TABLE IF NOT EXISTS `News`(
     `IDNews` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `TitleNews` VARCHAR(20) NOT NULL UNIQUE,
+    `TitleNews` VARCHAR(100) NOT NULL UNIQUE,
     `DescriptionNews` TEXT(1000),
     `ImageLinkNews` VARCHAR(100),
     `VideoLinkNews` VARCHAR(100)
@@ -151,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `News`(
 DROP TABLE IF EXISTS `Diaporama`;
 CREATE TABLE IF NOT EXISTS `Diaporama`(
     `IDDiaporama` INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `TitleDiaporama` VARCHAR(20) NOT NULL UNIQUE,
+    `TitleDiaporama` VARCHAR(100) NOT NULL UNIQUE,
     `DescriptionDiaporama` TEXT(1000),
     `IsNews` BOOLEAN NOT NULL, 
     `IDNewsOrRecipie` VARCHAR(100) NOT NULL
