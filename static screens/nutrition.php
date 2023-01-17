@@ -68,13 +68,10 @@ require_once("./../model.php");
                 <div class="col-lg-6 mx-auto">
                   <p class="lead mb-4">La nutrition s’intéresse aux rôles des nutriments dans l’organisme humain et à leurs interactions ainsi qu’aux besoins nutritionnels des individus et des populations. Elle prend également en considération les éléments qui influencent les choix alimentaires tels les comportements alimentaires et l’environnement alimentaire façonné par les facteurs socioéconomiques, technologiques ou autres. Les professionnels formés en nutrition contribuent par leurs interventions à promouvoir et à rétablir la santé</p>
                 </div>
-                <div class="row" style="margin-bottom: 5%;">
-                    <div class="col-lg-4"> </div>
-                    <form class="d-flex col-lg-4">
+                    <form class="d-flex search-ingredient-form">
                         <input class="form-control me-2" type="search" placeholder="Rechercher les ingrédients" aria-label="Search">
                         <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer tous les ingrédients</a>
                     </form>
-                </div>
                 <!-- <div class="overflow-hidden" style="max-height: 30vh;">
                   <div class="container px-5">
                     <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1578698236%2FBalanced%20Diet.jpg%3Fitok%3DBma9DcZ_" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">

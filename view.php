@@ -23,12 +23,59 @@
             <?php   
         }
 
+        function SideMenu(){
+            ?>
+                <button class="side-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="side-menu" aria-labelledby="offcanvasExampleLabel">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="side-menu-body">
+                        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                        <span class="fs-4">Options</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="./login" class="nav-link text-white" aria-current="page">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href="./login"/></svg>
+                                Se connecter
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./signup" class="nav-link text-white">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href="./signup"/></svg>
+                                Créer un compte
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropup">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>mdo</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?php
+        }
+
         function NavBar(){
             ?>
                 <!-- navbar -->
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                     <div class="container-fluid">
+                        <?php
+                        $this->SideMenu();
+                        ?>
                         <a class="navbar-brand" href="./index.php">
                             3djouzti
                         </a>
@@ -41,7 +88,7 @@
                             <a class="nav-link active" aria-current="page" href="./index.php">Acceuil</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">News</a>
+                            <a class="nav-link active" aria-current="page" href="./news.php">News</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="./idees.php">Idées de recettes</a>
@@ -56,7 +103,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Fetes</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./static screens/nutrition">Nutrition</a>
+                            <a class="nav-link active" aria-current="page" href="./nutrition">Nutrition</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Contact</a>
@@ -680,7 +727,7 @@
                     <img src="<?php echo $imageLink ?>" alt="ingredient picture">
                 </div>
                 <div class="ingrediant-and-quantity">
-                    <h6><?php echo $quantity." ".$unit ?><span style="visibility: hidden;">1</span></h6>
+                    <h6><?php echo $quantity." ".$unit ?><span class="filler">1</span></h6>
                     <p><?php echo $name ?></p>
                 </div>
             </div>
@@ -913,6 +960,949 @@
 
         //-----------------page ideés de  recettes fin
 
+        //page nutrition début---------------------------
+        function IndexNutrition(){
 
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="Nutrition";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php
+                        $this->NavBar();
+                        ?>
+                            <section id="zone-de-contenu">
+                            <?php
+                                $this->NutritionHeader();
+                                $this->ContentZoneNutrition();
+                            ?>
+                            </section> 
+                        <?php   
+                        $this->PageFooter();
+                        ?>
+
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php       
+
+        }
+
+        function NutritionHeader(){
+            ?>
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h1 class="display-4 fw-bold">Nutrition</h1>
+                <div class="col-lg-6 mx-auto">
+                  <p class="lead mb-4">La nutrition s’intéresse aux rôles des nutriments dans l’organisme humain et à leurs interactions ainsi qu’aux besoins nutritionnels des individus et des populations. Elle prend également en considération les éléments qui influencent les choix alimentaires tels les comportements alimentaires et l’environnement alimentaire façonné par les facteurs socioéconomiques, technologiques ou autres. Les professionnels formés en nutrition contribuent par leurs interventions à promouvoir et à rétablir la santé</p>
+                </div>
+                <div class="d-flex search-ingredient-form">
+                    <input class="form-control me-2" type="search" placeholder="Trouver un ingrédiant" id="trouver-ingredient-input" onkeyup="getIngredient()">
+                    <button  class="btn btn-md btn-outline-secondary" id="trouver-ingredient-btn">Rechercher</button>
+                </div>
+            </div>
+            <script>
+                let input;
+                let ingredientName;
+                function getIngredient() {
+                    input = document.getElementById("trouver-ingredient-input");
+                    ingredientName = input.value;
+                }
+                let id=5;
+                $("#trouver-ingredient-btn").click(function(){
+                    $.ajax(
+                        {
+                        url: "./operations/SearchIngredient.php",
+                        type: "POST",
+
+                        data: { name: ingredientName},
+                        success: function (data) {
+                            $("#search-results").empty();
+                            $("#search-results").html(data);
+
+                        }
+                    }); 
+                });    
+            </script>
+            <?php
+        }
+
+        function ContentZoneNutrition(){
+            ?>
+            <div class="container marketing" id="search-results">
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">Légumes.</span></h2>
+                        <p class="lead">Ils sont plus savoureux et aussi plus riches en vitamines. Les légumes contiennent aussi des polyphénols dont les propriétés antioxydantes pourraient jouer un rôle protecteur pour notre santé</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer toutes les légumes</a>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg" width="450px" height="350px">
         
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">fruit.</span></h2>
+                        <p class="lead">Gorgés d'eau, de vitamines, d'oligo-éléments ou encore de fibres ils apportent à l'organisme des éléments indispensable à son bon fonctionnement.</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer toutes les fruits</a>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/assortment-of-colorful-ripe-tropical-fruits-top-royalty-free-image-995518546-1564092355.jpg" width="450px" height="350px">
+        
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">Viandes</span></h2>
+                        <p class="lead">Une des meilleures sources alimentaires de fer avec une forte proportion de fer héminique - la forme de fer la mieux absorbée par l'organisme. Une richesse en protéines indispensables pour nous</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer toutes les viandes</a>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="https://images.ctfassets.net/3s5io6mnxfqz/5GlOYuzg0nApcehTPlbJMy/140abddf0f3f93fa16568f4d035cd5e6/AdobeStock_175165460.jpeg" width="450px" height="350px">
+        
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">Céréales</span></h2>
+                        <p class="lead">Très riches en fibres elles apportent à la fois des vitamines (B et E), des minéraux (fer, magnésium, zinc, potassium, sélénium) mais aussi des acides gras essentiels. Les céréales complètes sont des protéines végétales.</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer touts les céréales</a>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img src="https://health.clevelandclinic.org/wp-content/uploads/sites/3/2013/07/wholeGrainProducts-842797430-770x533-1-650x428.jpg" width="450px" height="350px">
+        
+                    </div>
+                </div>
+
+                <hr class="featurette-divider">
+        
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">Légumineuses</span></h2>
+                        <p class="lead">Pauvres en matières grasses et riches en fibres, les légumineuses sont excellentes dans la gestion du cholestérol, de la santé digestive et la régulation des niveaux d'énergie.</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer toutes les légumineuses</a>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="https://s30386.pcdn.co/wp-content/uploads/2020/02/p1cufi6apbjc69n13sp1th01doj6.jpg.optimal.jpg" width="450px" height="350px">
+        
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Catégorie des <span class="text-muted">Produits létiers</span></h2>
+                        <p class="lead">Indispensables tout au long de la vie et plus particulièrement au moment de la croissance chez l'enfant et chez les personnes âgées. Ils apportent du calcium indispensable à la fabrication de l'os et au maintien de sa solidité.</p>
+                        <a type="button" class="btn btn-md btn-outline-secondary" href="">Explorer toutes les Produits létiers</a>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img src="https://domf5oio6qrcr.cloudfront.net/medialibrary/9685/iStock-544807136.jpg" width="450px" height="350px">
+        
+                    </div>
+                </div>
+        
+                <hr class="featurette-divider">
+
+            </div>
+            <?php
+        }
+
+        function IngredientInfoTitle($Name,$Category,$IsHealthy){
+            ?>
+            <div class="row">
+                <div class="col centerer"><h4>Nom:  <?php echo $Name?></h4></div>
+                <div class="col centerer"><h4>Catégorie:  <?php echo $Category?></h4></div>
+                <?php
+                if ($IsHealthy==1){
+                    ?>
+                    <div class="col centerer"><h4>Healthy:  <i class="fa-solid fa-circle-check"></i></h4></div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="col centerer"><h4>Healthy:  <i class="fa-solid fa-circle-xmark"></i></h4></div>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+        }
+
+        //page nutrition fin---------------------------
+
+        //page fetes-------------------------------debut
+
+        function IndexFetes(){
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="Fetes";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php
+                        $this->NavBar();
+                        ?>
+                            <section id="zone-de-contenu">
+                            <?php
+                                $this->FetesHeader();
+                                $this->ContentZoneFetes();
+                            ?>
+                            </section> 
+                        <?php   
+                        $this->PageFooter();
+                        ?>
+
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="./scripts/acceuil.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php       
+        }
+
+        function FetesHeader(){
+            ?>
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h1 class="display-4 fw-bold">Fêtes</h1>
+                <div class="col-lg-6 mx-auto">
+                  <p class="lead mb-4">Choisissez une des fêtes et trouvez les meilleurs plats qui lui conviennent</p>
+                </div>
+            </div>
+            <?php
+        }
+        function FetesMenu(){
+            ?>
+                <!-- menu pour basculer entre les catégories -->
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <button type="button" class="btn  nav-link category-button" name="mariage"><i class="fa-solid fa-plate-wheat categorie-icon"></i></i>Mariage</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn  nav-link category-button" name="circoncision"><i class="fa-solid fa-drumstick-bite categorie-icon"></i>Circoncision</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn  nav-link category-button" name="aid-el-fitre"><i class="fa-solid fa-cake-candles categorie-icon"></i>Aid El Fitre</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn  nav-link category-button" name="aid-el-adha"><i class="fa-solid fa-martini-glass-citrus categorie-icon"></i>Aid EL Adha</button>
+                    </li>
+                </ul>
+            <?php
+        }
+
+        function getRecipiesInFestivityView($IDFestivity){
+            $controller = new controller();
+            $result =$controller->getRecipiesInFestivityController($IDFestivity);
+            return $result;
+        }
+
+        function ContentZoneFetes(){
+            $this->FetesMenu();
+            ?>
+            <div class="fetes">
+                <!-- mariage -->
+                <section class="category-content" id="mariage" style="display:none;">
+                    <h1>Recettes mariage</h1>
+                    <div class="row">
+                        <?php
+                        $recipies= $this->getRecipiesInFestivityView(1);
+                        foreach($recipies as $row){
+                            $this->RecipieCard($row);
+                        }    
+                        ?>
+                    </div>    
+                </section>
+
+                <!-- circonsion -->
+                <section class="category-content" id="circoncision" style="display:none;">
+                    <h1>Recettes circonsion</h1>
+                    <div class="row">
+                        <?php
+                        $recipies= $this->getRecipiesInFestivityView(2);
+                        foreach($recipies as $row){
+                            $this->RecipieCard($row);
+                        }    
+                        ?>
+                    </div>    
+                </section>
+
+                <!-- aid el fitre -->
+                <section class="category-content" id="aid-el-fitre" style="display:none;">
+                    <h1>Recettes aid el fitre</h1>
+                    <div class="row">
+                        <?php
+                        $recipies= $this->getRecipiesInFestivityView(3);
+                        foreach($recipies as $row){
+                            $this->RecipieCard($row);
+                        }    
+                        ?>
+                    </div>    
+                </section>
+
+                <!-- aid el adha -->
+                <section class="category-content" id="aid-el-adha" style="display:none;">
+                    <h1>Recettes aid el adha</h1>
+                    <div class="row">
+                        <?php
+                        $recipies= $this->getRecipiesInFestivityView(4);
+                        foreach($recipies as $row){
+                            $this->RecipieCard($row);
+                        }    
+                        ?>
+                    </div>    
+                </section>
+
+            </div>
+            <?php    
+        }
+        //page fetes-------------------------------fin
+
+        //page News-------------------------------debut
+
+        function IndexNews(){
+
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="News";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php
+                        $this->NavBar();
+                        ?>
+                            <section id="zone-de-contenu">
+                            <?php
+                                $this->ContentZoneNews();
+                            ?>
+                            </section> 
+                        <?php   
+                        $this->PageFooter();
+                        ?>
+
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="./scripts/acceuil.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php       
+
+        }
+
+        function ContentZoneNews(){
+            ?>
+            <div id="nav-separator"></div>
+            <div class="container">
+                <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+                    <div class="col-md-6 px-0">
+                    <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+                    <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+                    <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <?php
+                    foreach ($this->getRecipiesAsNewsView() as $row){
+                        $image="./DB/images/recipies/".$row["Title"].".jpg";
+                        $title = $row["Title"];
+                        $filler="";
+                        $filler=str_pad($title,60-strlen($title)," 1");
+                        $this->NewsCard("Recette",$title,$row["Content"],$image,$filler);
+                    }
+                    foreach ($this->getNewsView() as $row){
+                        $this->NewsCard("Article",$row["Title"],$row["Content"],$row["ImageLinkNews"],"");
+                    }
+
+                    ?>
+                </div>
+            </div>
+
+            <?php
+        }
+
+        function NewsCard($type,$title,$description,$image,$filler){
+            $description=mb_substr($description, 0, 100, 'UTF-8')."...";
+            ?>
+                <div class="col-md-6">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary"><?php echo $type ?></strong>
+                        <h3 class="mb-0"><?php echo $title ?><span class="filler"><?php echo $filler ?></span></h3>
+                        <div class="mb-1 text-muted">Nov 12</div>
+                        <p class="card-text mb-auto"><?php echo $description ?></p>
+                        <a href="./recette.php?recette=<?php echo $title ?>" class="stretched-link">Continue reading</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                        <img width="250" height="100%" src="<?php echo $image?>"</svg>
+                
+                        </div>
+                    </div>
+                </div>
+            <?php
+        }
+
+        function getRecipiesAsNewsView(){
+            $controller = new controller();
+            $result =$controller->getRecipiesAsNewsController();
+            return $result;  
+        }
+
+        function getNewsView(){
+            $controller = new controller();
+            $result =$controller->getNewsController();
+            return $result;  
+        }
+
+        //page News-------------------------------end 
+
+        //login ------------------------------
+        function IndexLogin(){
+            ?>
+            <!doctype html>
+                <html class="login" lang="fr">
+                    <?php
+                    $title="Se connecter";
+                    $this->PageHead($title);
+                    ?>
+                    <body class="text-center login">
+                        <?php $this->LoginForm(); ?>
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php         
+        }
+
+        function LoginForm(){
+            ?>
+            <main class="form-signin">
+                <form method="POST" action="./operations/validate.php">
+                    <h3>3djouzti</h3>
+                    <h1 class="h3 mb-3 fw-normal">Se connecter</h1>
+                
+                    <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                    <label for="floatingInput">Adresse mail</label>
+                    </div>
+                    <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                    <label for="floatingPassword">Mot de passe</label>
+                    </div>
+                
+                    <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="isAdmin" value="YES"> Se connecter en tent qu'administrateur
+                    </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Se connecter</button>
+                    <p class="mt-5 mb-3 text-muted">Vous n'avez pas un compte? <a href="./signup">S'inscrire</a></p>
+                </form>
+            </main>
+            <?php
+        }
+
+        //login ------------------------------end 
+        //Sign up ------------------------------start
+
+        function IndexSignUp(){
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="Créer un compte";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php $this->SignUpForm(); ?>
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php
+        }
+
+        function SignUpForm(){
+            ?>
+            <div class="container" id="sign-up-container">
+                <main>
+                    <div class="py-5 text-center">
+                        <h3>3djouzti</h3>
+                        <h2>Créer un compte</h2>
+                        <p class="lead">Créer un compte pour profiter aux maximum des fonctionalité du site.</p>
+                    </div>
+                    <div>
+                        <div>
+                            <h4 class="mb-3">Informations personelles</h4>
+                            <form class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Prénom</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Nom</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address for shipping updates.
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div class="row gy-3">
+                                    <div class="my-3 col-md-6">
+                                        <h6>Sexe</h6>
+                                        <div class="form-check">
+                                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" required>
+                                        <label class="form-check-label" for="credit">Male</label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                                        <label class="form-check-label" for="debit">Femele</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <label for="cc-expiration" class="form-label">Date de naissance</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Expiration date required
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Mot de passe</label>
+                                    <input type="password" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Confirmer le mot de passe</label>
+                                    <input type="password" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <button class="w-100 btn btn-primary btn-lg" type="submit">Créer mon compte</button>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <?php
+        }
+
+        //----------------------admin home Gestion de recettes --------start
+        function IndexAdmin(){
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="Admin Home";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php
+                         $this->NavBarAdmin();
+                         ?>
+                         <main class="flex-shrink-0">
+                            <div class="container administration">
+                            <?php
+                            $this->GestionRecettes();
+                            ?>
+                            </div>
+                        </main>
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="./scripts/sideMenu.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php
+        }
+
+        function NavBarAdmin(){
+            ?>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <?php $this->SideMenuAdmin(); ?>
+                <div class="container-fluid">
+                    <span class="navbar-brand">3djouzti</span>
+                </div>
+                <div class="text-muted">Administration</div>
+            </nav>
+            <?php
+        }
+
+        function SideMenuAdmin(){
+            ?>
+                <button class="side-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="side-menu" aria-labelledby="offcanvasExampleLabel">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="side-menu-body">
+                        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                        <span class="fs-4">Administration</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="" class="nav-link active text-white" aria-current="page">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
+                                Gestion des recettes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="nav-link text-white">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
+                                Gestion des news
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="nav-link text-white">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
+                                Gestion des utilisateurs
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="nav-link text-white">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
+                                Gestion de nutrition
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="nav-link text-white">
+                                <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
+                                Paramètre
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropup">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>Admin1</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <?php      
+        }
+
+        function GestionRecettes(){
+            ?>
+            <h1>Gérer les recettes publiées</h1>
+            <table class="table table-hover table-bordered">
+
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Difficulté</th>
+                        <th scope="col">Portions</th>
+                        <th scope="col">Proposé par</th>
+                        <th scope="col">Validée</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach($this->getAprrovedRecipiesView() as $row){ 
+                        ?>
+                        <tr>
+                            <td><?php echo $row["IDRecipie"] ?></td>
+                            <td><?php echo $row["TitleRecipie"] ?></td>
+                            <td><?php echo $row["Category"] ?></td>
+                            <td><?php echo $row["Difficulty"] ?></td>
+                            <td><?php echo $row["NumberOfServings"] ?></td>
+                            <td><?php echo $row["IDUser"] ?></td>
+                            <td><?php echo $row["IsApproved"] ?></td>
+                            <td class="actions">
+                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <a href="./modifierRecette.php?id=<?php echo $row["IDRecipie"] ?>" type="button" class="btn btn-warning">Modifier<i class="fa-solid fa-pen-to-square action-button"></i></a>
+                                    <a href="./operations/deleteRecipie.php?id=<?php echo $row["IDRecipie"] ?>" type="button" class="btn btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
+                                </div>
+                            </td>          
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <?php
+        }
+
+        function getAprrovedRecipiesView(){
+            $controller = new controller();
+            $result =$controller->getAprrovedRecipiesController();
+            return $result; 
+        }
+
+        //admin home Gestions de recettes ------------------------------end
+
+        //admin modifier recette-------------------------------start
+        function IndexModifierRecette(){
+            ?>
+            <!doctype html>
+                <html lang="fr">
+                    <?php
+                    $title="Modifier recette";
+                    $this->PageHead($title);
+                    ?>
+                    <body>
+                        <?php
+                         $this->NavBarAdmin();
+                         ?>
+                         <main class="flex-shrink-0">
+                            <div class="container administration">
+                            <?php
+                            $recette=$this->getRecipieByTitleView("Brik")->fetch();
+                            $this->ModifierRecetteBody($recette);
+                            ?>
+                            </div>
+                        </main>
+                        <!-- Bootstrap Bundle with Popper -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                    </body>
+                </html>
+            <?php
+        }
+
+        function ModifierRecetteBody($recette){
+            $title=$recette["TitleRecipie"];
+            $id=$recette["IDRecipie"];
+            ?>
+                <h1>Modifier la recette: <?php echo $title ?></h1>
+                <?php $this->ModifierRecetteForm($recette);?>
+                <hr class="my-4">
+                <?php $this->ModifierIngredientsRecette($title,$id)?>  
+                <hr class="my-4">
+                <?php $this->ModifierEtapesRecette($title,$id)?> 
+                <hr class="my-4">
+            <?php    
+        }
+
+        function ModifierRecetteForm($recette){
+            $title=$recette["TitleRecipie"];
+            $description=$recette["DescriptionRecipie"];
+            $category=$recette["Category"];
+            $prepTime=$recette["PrepTime"];
+            $cookTime=$recette["CookTime"];
+            $restTime=$recette["RestTime"];
+            $difficulty=$recette["Difficulty"];
+            $id=$recette["IDRecipie"];
+            ?>
+            <form class="needs-validation" novalidate method="POST" action="./operations/modifierInfoRecette.php">
+                <h3>Informations de la recette</h3>
+                <div class="row g-3">
+                    <div class="col-lg-4">
+                        <label class="form-label">Titre</label>
+                        <input name="titreRecette" type="text" class="form-control" value="<?php echo $title ?>" required>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <label class="form-label">Catégorie</label>
+                        <select name="categorieRecette" class="form-select" aria-label="Default select example">
+                            <option selected><?php echo $category?></option>
+                            <option value="entreés">entrées</option>
+                            <option value="plats">plats</option>
+                            <option value="desserts">desserts</option>
+                            <option value="boissons">boissons</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <label class="form-label">Description</label>
+                        <textarea name="descriptionRecette" class="form-control" cols="30" rows="5" required><?php echo $description ?></textarea>
+                    </div>
+                </div>
+
+                <div class="row gy-3">
+                    <div class="col-lg-3">
+                        <label class="form-label">Temps de préparation</label>
+                        <input name="tempsPreparation" type="number" class="form-control" value=<?php echo $prepTime ?> required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Temps de cuisson</label>
+                        <input name="tempsCuisson" type="number" class="form-control" value=<?php echo $cookTime ?> required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Temps de repos</label>
+                        <input name="tempsRepos" type="number" class="form-control" value=<?php echo $restTime ?> required>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="form-label">Difficulté</label>
+                        <select name="difficulteRecette" class="form-select" aria-label="Default select example">
+                            <option selected><?php echo $difficulty?></option>
+                            <option value="Facile">Facile</option>
+                            <option value="Moyenne">Moyenne</option>
+                            <option value="Difficile">Difficile</option>
+                        </select>
+                    </div>
+                </div>
+                <input name="idRecette" type="hidden" value=<?php echo $id ?>>
+                <input style="margin-top:2%" class="btn btn-primary btn-md" value="Modifier la recette" type="submit">
+            </form>
+            <?php 
+        }
+
+            function ModifierIngredientsRecette($title,$id){
+                ?>
+                <h3>Ingrédients de la recette</h3>
+                <table class="table table-hover table-bordered " style="width: 60%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Unité</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $i=1;
+                        foreach($this->getRecipieIngredientsView($title) as $row){
+                        ?>
+                            <tr>
+                                <form action="./operations/modifyIngredientInRecipie.php" method="POST">
+                                    <td><?php echo $i?></td>
+                                    <td><?php echo $row["NameIngredient"]?></td>
+                                    <td><input name="quantity" type="number" value=<?php echo $row["Quantity"]?>></td>
+                                    <td><input name="unit" type="text" value="<?php echo $row["Unit"]?>"></td>
+                                    <td style="width: 20%;">
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <input type="hidden" name="IDRecipie" value=<?php echo $row["IDRecipie"] ?>>
+                                            <input type="hidden" name="IDIngredient" value=<?php echo $row["IDIngredient"] ?>>
+                                            <input type="submit" class="btn btn-warning" value="Modifier">
+                                            <a href="./operations/deleteIngredientFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDIngredient=<?php echo $row["IDIngredient"] ?>" type="button" class="btn btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
+                                        </div> 
+                                    </td> 
+                                </form>
+                            </tr>
+                        <?php
+                        $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <form action="./operations/addIngredientToRecipie.php" method="POST">
+                    <div class="row gy-3">
+                        <h5>Ajouter un ingrédient à cette recette</h5>
+                        <div class="col-lg-3">
+                            <label class="form-label">Nom de l'ingrédient</label>
+                            <select name="idIngredient" class="form-select" aria-label="Default select example">
+                                <option selected>Choisir un ingrédient</option>
+                                <?php
+                                foreach($this->getIngredientsView() as $row){
+                                    ?>
+                                <option value=<?php echo $row["IDIngredient"]?>><?php echo $row["NameIngredient"]?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="form-label">Quantité</label>
+                            <input name="quantityIngredient" type="text" class="form-control" value="" required>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="form-label">Unité</label>
+                            <input name="unitIngredient" type="text" class="form-control" value="" required>
+                        </div> 
+                    </div>
+                    <input name="idRecette" type="hidden" value=<?php echo $id?>>
+                    <input type="submit" style="margin-top:2%" class="btn btn-md btn-outline-secondary" value="Ajouter un ingrédient">
+                </form>
+                <?php
+            }
+
+            function ModifierEtapesRecette($title,$id){
+                ?>
+                <h3>Etapes de la recette</h3>
+                <table class="table table-hover table-bordered " style="width: 60%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        foreach($this->getRecipieStepsView($title) as $row){
+                        ?>
+                            <tr>
+                                <td><input type="text" value="<?php echo $row["StepOrder"]?>"></td>
+                                <td><textarea cols="50" rows="4"><?php echo $row["DescriptionStep"]?></textarea></td>
+                                <td style="width: 20%;"><a href="./operations/deleteStepFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDStep=<?php echo $row["IDStep"] ?>" type="button" class="btn btn-sm btn-danger">Enlever de cette recette<i class="fa-solid fa-trash-can action-button"></i></a></td>    
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <form method="POST" action="./operations/addStepToRecipie.php">
+                    <div class="row gy-3">
+                        <h5>Ajouter une étape à cette recette</h5>
+                        <div class="col-lg-2">
+                            <label class="form-label">Numéro d'ordre</label>
+                            <input name="order" type="number" class="form-control" value="" required>
+                        </div>
+                        <div class="col-lg-9">
+                            <label class="form-label">Déscription</label><br>
+                            <textarea name="descriptionStep" cols="70" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <input name="idRecette" type="hidden" value=<?php echo $id?>>
+                    <input type="submit" class="btn btn-md btn-outline-secondary" value="Ajouter une étape">
+                </form>
+                <?php
+            }
     }?>

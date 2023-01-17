@@ -41,8 +41,10 @@ INSERT INTO `Ingredient` (`IDIngredient`,`NameIngredient`, `CategoryIngredient`,
 (29,"Oeuf", "meat", "tout", 1, NULL, NULL, NULL, NULL,NULL),
 (30,"Huile", "fat", "tout", NULL, NULL, NULL, NULL, NULL,NULL),
 
-
-
+-- /////////////////////////5th recipie////////////////////////////--
+(31,"Levure chimique", "spice", "tout", NULL, NULL, NULL, NULL, NULL,NULL),
+(32,"Levure", "spice", "tout", NULL, NULL, NULL, NULL, NULL,NULL),
+(33,"Miel", "sugar", "tout", NULL, NULL, NULL, NULL, NULL,NULL);
 
 INSERT INTO `IngredientInRecipie` (`IDRecipie`, `IDIngredient`, `Quantity`, `Unit`) VALUES
 (1, 1, 3, NULL),
@@ -92,6 +94,14 @@ INSERT INTO `IngredientInRecipie` (`IDRecipie`, `IDIngredient`, `Quantity`, `Uni
 (4, 8, NULL, NULL),
 (4, 9, NULL, NULL);
 
+-- ///////////////5th recipie///////////////// --
+(5, 5, 250, "g"),
+(5, 8, 0.5, "c à café"),
+(5, 32, 8, "g"),
+(5, 31, 1, "sachet"),
+(5, 7, 45, "cl");
+(5, 33, NULL, NULL);
+
 INSERT INTO `Step` (`IDStep`,`IDRecipie`,`StepOrder`,`DescriptionStep`) VALUES
 (1, 1, 1,"Pour la pâte, dans une terrine, mettez la semoule et le sel puis ajoutez-y de l’eau petit à petit jusqu’à obtention d’une pâte assez lisse. Pétrissez-la pendant 30 min."),
 (2, 1, 2,"Faites des boules à la grosseur d'un citron, laissez reposer 30 min."),
@@ -121,8 +131,16 @@ INSERT INTO `Step` (`IDStep`,`IDRecipie`,`StepOrder`,`DescriptionStep`) VALUES
 -- ///////////////4th recipie///////////////// --
 (1, 4, 1,"Nettoyez les crevettes , décortiquez-les et faites-les revenir 2 min dans une poêle menu d'une noix de beurre ou un filet d'huile (cette étape est facultative, ne pas les cuire et les ajouter crues). Entre temps, Préparez les légumes, épluchez les oignons et lavez-les. Rincez la coriandre et ciselez-la."),
 (2, 4, 2,"Étalez une feuille de brick dans une assiette puis cassez un œuf au milieu. Ajoutez sur l'oeuf entier, six crevettes, un oignon frais coupés en dés et des morceaux de mozzarella. Parsemez de coriandre. Salez et poivrez à votre convenance. Pliez la feuille de brik en quatre. Procédez de la même façon avec les feuilles de dioul qui reste."),
-(3, 4, 3,"Dans une poêle munie d'une noix de beurre ou un filet d'huile. Faites cuire les bricks sur feu doux une minute de chaque côtés, elles doivent être bien dorées et croustillantes en fin de cuisson (si vous aimez les oeufs bien cuits, augmentez le temps de cuisson). Égouttez les bricks sur du papier absorbant et dégustez-les aussitôt avec du citron et une salade de votre choix.");
+(3, 4, 3,"Dans une poêle munie d'une noix de beurre ou un filet d'huile. Faites cuire les bricks sur feu doux une minute de chaque côtés, elles doivent être bien dorées et croustillantes en fin de cuisson (si vous aimez les oeufs bien cuits, augmentez le temps de cuisson). Égouttez les bricks sur du papier absorbant et dégustez-les aussitôt avec du citron et une salade de votre choix."),
 -- ///////////////5th recipie///////////////// --
+
+(1, 5, 1,"Dans un saladier, mélangez la semoule, la farine et la levure chimique."),
+(2, 5, 2,"Dans le blender, ajoutez le contenu du saladier ainsi que le sel et la levure fraîche. Mixez alors le tout pendant au moins 5 minutes. N’hésitez pas à racler les bords du blender avec une spatule si jamais la semoule se colle trop aux parois. La pâte doit alors être lisse, homogène et dense."),
+(3, 5, 3,"Versez alors la pâte dans un grand saladier, couvrez à l’aide d’un torchon et laissez reposer pendant une heure. La pâte va alors se recouvrir petit à petit de bulles d’air, ce qui rendra le baghrir encore plus léger, moelleux et aéré."),
+(4, 5, 4,"Prenez ensuite une poêle antiadhésive et si elle accroche un peu, beurrez ou huilez légèrement le fond de la poêle."),
+(5, 5, 5,"Faites chauffer à feu moyen. Versez une louche de pâte au centre et laissez cuire sur une seule face le baghrir jusqu’à ce que des trous se forment à la surface."),
+(6, 5, 6,"Déposez le baghrir sur un torchon propre, et faites cuire les autres. N’empilez pas les baghrirs les uns sur les autres pour éviter qu’ils ne collent."),
+(7, 5, 7,"Vous pouvez servir les baghrirs avec du fromage, de la confiture, de la pâte à tartiner, les plus gourmands trouveront les meilleures idées pour accompagner le baghrir à la semoule fine !");
 
 INSERT INTO `CookingMethod` (`IDCookingMethod`,`NameCookingMethod`,`IsHealthy`) VALUES
 (1,"Sauter",1);
@@ -209,3 +227,13 @@ INSERT INTO `News` (`IDNews`, `TitleNews`, `DescriptionNews`,`ImageLinkNews`,`Vi
 INSERT INTO `Diaporama` (`IDDiaporama`,`TitleDiaporama`,`DescriptionDiaporama`,`IsNews`,`IDNewsOrRecipie`) VALUES
 (1,"Avez vous une intolérance au lactose? Essayez les laits végétaux!","Comment bien choisir un remplacant du lait",1,1),
 (2,"Essayer les M7adjebs","Des crêpes algériennes farcies qui réconfortent en hiver",0,1);
+
+
+INSERT INTO `Festivity` (`IDFestivity`,`NameFestivity`) VALUES
+(1,"Mariage"),
+(2,"Circonsion"),
+(3,"Aid El Fitre"),
+(4,"Aid El Adha");
+
+INSERT INTO `RecipieInFestivity` (`IDFestivity`,`IDRecipie`) VALUES
+(1,2);

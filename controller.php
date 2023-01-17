@@ -38,5 +38,121 @@
             $result = $model->getRecipiesByIngredientListModel($ingredientNames);
             return $result;
         }
+
+        public function getIngredientByNameController($Name){
+            $model = new model();
+            $result = $model->getIngredientByNameModel($Name);
+            return $result;
+        }
+
+        public function getMicronutrientByIDController($ID){
+            $model = new model();
+            $result = $model->getMicronutrientByIDModel($ID);
+            return $result;
+        }
+
+        public function getRecipiesInFestivityController($IDFestivity){
+            $model = new model();
+            $result = $model->getRecipiesInFestivityModel($IDFestivity);
+            return $result;
+        }
+
+        public function getRecipiesAsNewsController(){
+            $model = new model();
+            $result = $model->getRecipiesAsNewsModel();
+            return $result;
+        }
+
+        public function getNewsController(){
+            $model = new model();
+            $result = $model->getNewsModel();
+            return $result;
+        }
+
+        function testInput($data) {
+     
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+
+        public function validateUserLoginController($email,$password){
+            $email=$this->testInput($email);
+            $password=$this->testInput($password);
+
+            $model= new model();
+            if($model->validateUserLoginModel($email,$password)==true){
+                echo "<script language='javascript'>";
+                echo "alert('Correct INFORMATION user')";
+                echo "</script>"; 
+            }else{
+                echo "<script language='javascript'>";
+                echo "alert('WRONG INFORMATION user')";
+                echo "</script>";
+            }
+        }
+
+        public function validateAdminLoginController($name,$password){
+            $email=$this->testInput($name);
+            $password=$this->testInput($password);
+
+            $model= new model();
+            if($model->validateAdminLoginModel($name,$password)==true){
+                header("location:./../admin.php");
+            }else{
+                echo "<script language='javascript'>";
+                echo "alert('WRONG INFORMATION admin')";
+                echo "</script>";
+            }
+        }
+
+        public function getAprrovedRecipiesController(){
+            $model = new model();
+            $result = $model->getAprrovedRecipiesModel();
+            return $result;
+        }
+
+        public function deleteRecipieController($id){
+            $model = new model();
+            $result = $model->deleteRecipieModel($id);
+            return $result;
+        }
+
+        public function modifyRecipieController($title,$category,$description,$prepTime,$cookTime,$restTime,$difficulty,$id){
+            $model = new model();
+            $result = $model->modifyRecipieModel($title,$category,$description,$prepTime,$cookTime,$restTime,$difficulty,$id);
+            return $result;
+        }
+
+        public function addIngredientToRecipieController($idRecipie,$idIngredient,$quantity,$unit){
+            $model = new model();
+            $result = $model->addIngredientToRecipieModel($idRecipie,$idIngredient,$quantity,$unit);
+            return $result;
+        }
+
+        public function addStepToRecipieController($idRecipie,$order,$description){
+            $model = new model();
+            $result = $model->addStepToRecipieModel($idRecipie,$order,$description);
+            return $result;
+        }
+
+        public function deleteStepFromRecipieController($IDRecipie,$IDStep){
+            $model = new model();
+            $result = $model->deleteStepFromRecipieModel($IDRecipie,$IDStep);
+            return $result;
+        }
+
+        public function deleteIngredientFromRecipieController($IDRecipie,$IDIngredient){
+            $model = new model();
+            $result = $model->deleteIngredientFromRecipieModel($IDRecipie,$IDIngredient);
+            return $result;
+        }
+
+        public function modifyIngredientInRecipieController($IDRecipie,$IDIngredient,$quantity,$unit){
+            $model = new model();
+            $result = $model->modifyIngredientInRecipieModel($IDRecipie,$IDIngredient,$quantity,$unit);
+            return $result;
+        }
     }
 ?>

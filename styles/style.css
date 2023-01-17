@@ -10,6 +10,22 @@ nav .container-fluid{
     height: 3px;
 }
 
+.side-toggler{
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: box-shadow .15s ease-in-out;
+    border-color: rgba(0,0,0,.1);
+    margin-right: 2%;
+}
+
+#side-menu-body{
+    height: 100%;
+}
+
 /* diaporama */
 
 #diaporama .container-fluid{
@@ -296,7 +312,7 @@ display: block;
 /*idées de recettes- end------------------------------------------*/
 
 
-/*nutition--------------------------------------------------------------------------------------------------start-*/
+/*nutrition--------------------------------------------------------------------------------------------------start-*/
 /* .category-card{
     position: relative;
 }
@@ -320,6 +336,26 @@ display: block;
 } */
 /* MARKETING CONTENT
 -------------------------------------------------- */
+
+
+.search-ingredient-form {
+    width: 30%;
+    margin: 0 auto 0 auto;
+    margin-bottom: 2%;
+}
+
+.centerer{
+    text-align: center;
+}
+
+.ingredient-nutrition-info{
+    margin: 5% 0;
+    display: inline-block;
+    width: 40%;
+    height: fit-content;
+    text-align: center;
+    padding: 0;
+}
 
 
 
@@ -382,3 +418,87 @@ display: block;
     }
   }
 /*nutition--------------------------------------------------------------------------------------------------end-
+
+/*fetes----------------start*/
+.fetes{
+    padding: 0 5% 2%;
+    min-height: 220px;
+}
+/*fetes----------------end*/
+/*news----------------start*/
+#nav-separator{
+    margin-top: 6%;
+}
+
+.filler{
+    visibility: hidden;
+}
+
+/*news---------------------------------end*/
+
+/*login------------------------------------*/
+html.login,
+body.login {
+  height: 100%;
+}
+
+body.login {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+/*login -------------------------------end*/
+
+
+/*signup --------------------------------start*/
+#sign-up-container{
+ width: 50%;   
+}
+/*signup ---------------------------------end*/
+
+/*admin home-----------------------------------*/
+nav .text-muted{
+    margin-right: 5%;
+}
+.container.administration{
+    padding: 7% 0;
+}
+
+.action-button{
+    margin-left: 5%;
+}
+td.actions{
+    text-align: center;
+}
+.btn-group{
+    width: 70%;
+}

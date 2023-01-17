@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `CookingMethodInRecipie`(
 );
 
 DROP TABLE IF EXISTS `RecipieInFestivity`;
-CREATE TABLE IF NOT EXISTS `CookingMethodInRecipie`(
+CREATE TABLE IF NOT EXISTS `RecipieInFestivity`(
     `IDRecipie` INT(10) NOT NULL,
     `IDFestivity` INT(10) NOT NULL,
     PRIMARY KEY(`IDRecipie`,`IDFestivity`),
