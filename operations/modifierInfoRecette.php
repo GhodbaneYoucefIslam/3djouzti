@@ -13,6 +13,6 @@ $id=$_POST["idRecette"];
 $controller=new controller();
 $controller->modifyRecipieController($title,$category,$description,$prepTime,$cookTime,$restTime,$difficulty,$id);
 
-header("location:./../modifierRecette.php");
+header("location:./../modifierRecette.php?titleRecipie=".$title);
 
 ?>

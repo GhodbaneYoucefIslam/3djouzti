@@ -5,7 +5,9 @@ $idIngredient=$_POST["idIngredient"];
 $quantity=$_POST["quantityIngredient"];
 $unit=$_POST["unitIngredient"];
 
+$titleRecipie=$_POST["titleRecipie"];
+
 $controller=new controller();
 $controller->addIngredientToRecipieController($idRecipie,$idIngredient,$quantity,$unit);
-header("location:./../modifierRecette.php");
+header("location:./../modifierRecette.php?titleRecipie=".$titleRecipie);
 ?>

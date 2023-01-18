@@ -1,5 +1,6 @@
 <?php
+$titleRecipie=$_GET["titleRecipie"];
 require_once("view.php");
 $view= new view();
-$view->IndexModifierRecette();
+$view->IndexModifierRecette($titleRecipie,1);
 ?>

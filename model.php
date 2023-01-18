@@ -94,13 +94,22 @@
             return $query;
         }
 
-        public function getIngredientByNameModel($Name){
+        public function getIngredientMicronutrientsByNameModel($Name){
             $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
             $sql= "SELECT * FROM ingredient INNER JOIN micronutrientiningredient ON ingredient.IDIngredient=micronutrientiningredient.IDIngredient WHERE NameIngredient=?";
             $args=array($Name);
             $query = $this->sqlQuery($conn,$sql,$args);  
             $this->deconnexion($conn);
             return $query;
+        }
+
+        public function getIngredientByNameModel($ingredientName){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "SELECT * FROM ingredient WHERE NameIngredient=?";
+            $args=array($ingredientName);
+            $query = $this->sqlQuery($conn,$sql,$args);  
+            $this->deconnexion($conn);
+            return $query; 
         }
 
         public function getRecipiesByIngredientListModel($ingredientNames){
@@ -300,6 +309,69 @@
             $query = $this->sqlQuery($conn,$sql,$args);  
             $this->deconnexion($conn);
             return $query; 
+        }
+
+        public function modifyStepInRecipieModel($IDRecipie,$IDStep,$description,$order){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "UPDATE step SET `StepOrder`=?,`DescriptionStep`=? WHERE `IDRecipie`=? AND IDStep=? ";
+            $args=array($order,$description,$IDRecipie,$IDStep);
+            $query = $this->sqlQuery($conn,$sql,$args);  
+            $this->deconnexion($conn);
+            return $query; 
+        }
+
+        public function modifyIngredientModel($IDIngredient,$NameIngredient,$Season,$CategoryIngredient,$IsHealthy,$CaloriesIngredient,$FatsIngredient,$CarbsIngredient,$ProtienIngredient){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "UPDATE ingredient SET `NameIngredient`=?,`Season`=?,`CategoryIngredient`=?,`IsHealthy`=?,`CaloriesIngredient`=?,`TotalFatIngredient`=?,`TotalCarbsIngredient`=?,`TotalProtienIngredient`=? WHERE `IDIngredient`=? ";
+            $args=array($NameIngredient,$Season,$CategoryIngredient,$IsHealthy,$CaloriesIngredient,$FatsIngredient,$CarbsIngredient,$ProtienIngredient,$IDIngredient);
+            $query = $this->sqlQuery($conn,$sql,$args);  
+            $this->deconnexion($conn);
+            return $query; 
+        }
+
+        public function getMicronutrientByNameModel($name){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "SELECT * FROM micronutrient WHERE NameMicronutrient=?";
+            $args=array($name);
+            $query = $this->sqlQuery($conn,$sql,$args); 
+            $this->deconnexion($conn);
+            return $query;
+        }
+
+        public function addMicronutrientModel($micronutrientName,$type,$percentage,$NameIngredient){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            //adding the micronutrient itself-----------
+            $sql= "INSERT INTO `Micronutrient` (`NameMicronutrient`, `Type`) VALUES
+            (?, ?)";
+            $args=array($micronutrientName,$type);
+            $query = $this->sqlQuery($conn,$sql,$args); 
+            //adding the micronutrient to the ingredient 
+            $idIngredient=$this->getIngredientByNameModel($NameIngredient)->fetch()["IDIngredient"];
+            $idMicronutrient=$this->getMicronutrientByNameModel($micronutrientName)->fetch()["IDMicronutrient"];
+            $sql= "INSERT INTO `MicronutrientInIngredient` (`IDMicronutrient`, `IDIngredient`,`DailyValue`) VALUES
+            (?, ?, ?)";
+            $args=array($idMicronutrient,$idIngredient,$percentage);
+            $query = $this->sqlQuery($conn,$sql,$args); 
+            $this->deconnexion($conn);
+            return $query; 
+        }
+
+        public function modifyMicronutrientInIngredientModel($idIngredient,$idMicronutrient,$percentage){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "UPDATE micronutrientiningredient SET `DailyValue`=? WHERE `IDIngredient`=? AND `IDMicronutrient`=?";
+            $args=array($percentage,$idIngredient,$idMicronutrient);
+            $query = $this->sqlQuery($conn,$sql,$args);  
+            $this->deconnexion($conn);
+            return $query; 
+        }
+
+        public function deleteMicronutrientFromIngredientModel($IDIngredient,$IDMicronutrient){
+            $conn=$this->connexion($this->dbname,$this->servername,$this->username,$this->password);
+            $sql= "DELETE FROM micronutrientiningredient WHERE IDIngredient=? AND IDMicronutrient=? ";
+            $args=array($IDIngredient,$IDMicronutrient);
+            $query = $this->sqlQuery($conn,$sql,$args);
+            $this->deconnexion($conn);
+            return $query;
         }
     }
 ?>

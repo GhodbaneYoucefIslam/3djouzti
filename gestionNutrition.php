@@ -1,5 +1,5 @@
 <?php
 require_once("view.php");
 $view= new view();
-$view->IndexAdmin(1);
+$view->IndexGestionNutrition(4);
 ?>

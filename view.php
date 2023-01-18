@@ -100,7 +100,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Saison</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Fetes</a>
+                            <a class="nav-link active" aria-current="page" href="./fetes.php">Fetes</a>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="./nutrition">Nutrition</a>
@@ -265,7 +265,7 @@
             $title=$recipie["TitleRecipie"];
             $description=$recipie["DescriptionRecipie"];
             $description=mb_substr($description, 0, 60, 'UTF-8')."...";
-            $imageLink = "./DB/images/recipies/".$title.".jpg";
+            $imageLink = $recipie["ImageLinkRecipie"];
             ?>
             <div class="col">
                 <div class="card shadow-sm recipie-card">
@@ -610,7 +610,7 @@
             }   
             $title=$recipie["TitleRecipie"];
             $description=$recipie["DescriptionRecipie"];
-            $imageLink = "./DB/images/recipies/".$title.".jpg";
+            $imageLink = $recipie["ImageLinkRecipie"];
             $rating=$recipie["Rating"];
             $videoLink=$recipie["VideoLink"];
             $prepTime=$recipie["PrepTime"];
@@ -718,7 +718,7 @@
         }
         function IngredientSquare($ingredient){
             $name=$ingredient["NameIngredient"];
-            $imageLink = "./DB/images/ingredients/"."$name".".webp";
+            $imageLink = $ingredient["ImageLinkIngredient"];;
             $quantity=$ingredient["Quantity"];
             $unit= $ingredient["Unit"];
             ?>
@@ -1531,7 +1531,7 @@
         }
 
         //----------------------admin home Gestion de recettes --------start
-        function IndexAdmin(){
+        function IndexAdmin($active){
             ?>
             <!doctype html>
                 <html lang="fr">
@@ -1541,7 +1541,7 @@
                     ?>
                     <body>
                         <?php
-                         $this->NavBarAdmin();
+                         $this->NavBarAdmin($active);
                          ?>
                          <main class="flex-shrink-0">
                             <div class="container administration">
@@ -1559,10 +1559,10 @@
             <?php
         }
 
-        function NavBarAdmin(){
+        function NavBarAdmin($active){
             ?>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <?php $this->SideMenuAdmin(); ?>
+                <?php $this->SideMenuAdmin($active); ?>
                 <div class="container-fluid">
                     <span class="navbar-brand">3djouzti</span>
                 </div>
@@ -1571,44 +1571,43 @@
             <?php
         }
 
-        function SideMenuAdmin(){
+        function SideMenuAdmin($active){
             ?>
-                <button class="side-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button style="margin-left:2%;" class="side-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#side-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="side-menu" aria-labelledby="offcanvasExampleLabel">
                     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" id="side-menu-body">
                         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
                         <span class="fs-4">Administration</span>
-                        </a>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
-                                <a href="" class="nav-link active text-white" aria-current="page">
+                                <a href="./admin.php" class="nav-link text-white side-menu-link <?php if ($active==1)echo "active" ?>" aria-current="page">
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
                                 Gestion des recettes
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="nav-link text-white">
+                                <a href="" class="nav-link text-white side-menu-link <?php if ($active==2)echo "active" ?>" >
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
                                 Gestion des news
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="nav-link text-white">
+                                <a href="" class="nav-link text-white side-menu-link <?php if ($active==3)echo "active" ?>" >
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
                                 Gestion des utilisateurs
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="nav-link text-white">
+                                <a href="./gestionNutrition.php" class="nav-link text-white side-menu-link <?php if ($active==4)echo "active" ?>">
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
                                 Gestion de nutrition
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="nav-link text-white">
+                                <a href="" class="nav-link text-white side-menu-link <?php if ($active==5)echo "active" ?>">
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href=""/></svg>
                                 Paramètre
                                 </a>
@@ -1664,7 +1663,7 @@
                             <td><?php echo $row["IsApproved"] ?></td>
                             <td class="actions">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <a href="./modifierRecette.php?id=<?php echo $row["IDRecipie"] ?>" type="button" class="btn btn-warning">Modifier<i class="fa-solid fa-pen-to-square action-button"></i></a>
+                                    <a href="./modifierRecette.php?titleRecipie=<?php echo $row["TitleRecipie"] ?>" type="button" class="btn btn-warning">Modifier<i class="fa-solid fa-pen-to-square action-button"></i></a>
                                     <a href="./operations/deleteRecipie.php?id=<?php echo $row["IDRecipie"] ?>" type="button" class="btn btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
                                 </div>
                             </td>          
@@ -1686,7 +1685,7 @@
         //admin home Gestions de recettes ------------------------------end
 
         //admin modifier recette-------------------------------start
-        function IndexModifierRecette(){
+        function IndexModifierRecette($titleRecipie,$active){
             ?>
             <!doctype html>
                 <html lang="fr">
@@ -1696,12 +1695,12 @@
                     ?>
                     <body>
                         <?php
-                         $this->NavBarAdmin();
+                         $this->NavBarAdmin($active);
                          ?>
                          <main class="flex-shrink-0">
                             <div class="container administration">
                             <?php
-                            $recette=$this->getRecipieByTitleView("Brik")->fetch();
+                            $recette=$this->getRecipieByTitleView($titleRecipie)->fetch();
                             $this->ModifierRecetteBody($recette);
                             ?>
                             </div>
@@ -1787,6 +1786,7 @@
                     </div>
                 </div>
                 <input name="idRecette" type="hidden" value=<?php echo $id ?>>
+                <input name="titleRecipie" type="hidden" value=<?php echo $title ?>>
                 <input style="margin-top:2%" class="btn btn-primary btn-md" value="Modifier la recette" type="submit">
             </form>
             <?php 
@@ -1820,8 +1820,9 @@
                                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                             <input type="hidden" name="IDRecipie" value=<?php echo $row["IDRecipie"] ?>>
                                             <input type="hidden" name="IDIngredient" value=<?php echo $row["IDIngredient"] ?>>
+                                            <input type="hidden" name="titleRecipie" value=<?php echo $title ?>>
                                             <input type="submit" class="btn btn-warning" value="Modifier">
-                                            <a href="./operations/deleteIngredientFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDIngredient=<?php echo $row["IDIngredient"] ?>" type="button" class="btn btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
+                                            <a href="./operations/deleteIngredientFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDIngredient=<?php echo $row["IDIngredient"]?>&titleRecipie=<?php echo $title?>" type="button" class="btn btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
                                         </div> 
                                     </td> 
                                 </form>
@@ -1858,6 +1859,7 @@
                         </div> 
                     </div>
                     <input name="idRecette" type="hidden" value=<?php echo $id?>>
+                    <input type="hidden" name="titleRecipie" value=<?php echo $title ?>>
                     <input type="submit" style="margin-top:2%" class="btn btn-md btn-outline-secondary" value="Ajouter un ingrédient">
                 </form>
                 <?php
@@ -1879,9 +1881,19 @@
                         foreach($this->getRecipieStepsView($title) as $row){
                         ?>
                             <tr>
-                                <td><input type="text" value="<?php echo $row["StepOrder"]?>"></td>
-                                <td><textarea cols="50" rows="4"><?php echo $row["DescriptionStep"]?></textarea></td>
-                                <td style="width: 20%;"><a href="./operations/deleteStepFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDStep=<?php echo $row["IDStep"] ?>" type="button" class="btn btn-sm btn-danger">Enlever de cette recette<i class="fa-solid fa-trash-can action-button"></i></a></td>    
+                                <form method="POST" action="./operations/modifyStepInRecipie.php">
+                                    <td><input name="order" type="number" value=<?php echo $row["StepOrder"]?>></td>
+                                    <td><textarea name="descriptionStep" cols="50" rows="4"><?php echo $row["DescriptionStep"]?></textarea></td>
+                                    <td style="width: 30%;">
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <input type="hidden" name="IDRecipie" value=<?php echo $row["IDRecipie"] ?>>
+                                                <input type="hidden" name="IDStep" value=<?php echo $row["IDStep"] ?>>
+                                                <input type="hidden" name="titleRecipie" value=<?php echo $title ?>>
+                                                <input type="submit" class="btn btn-warning" value="Modifier">
+                                                <a href="./operations/deleteStepFromRecipie?IDRecipie=<?php echo $row["IDRecipie"] ?>&IDStep=<?php echo $row["IDStep"] ?>&titleRecipie=<?php echo $title ?>" type="button" class="btn btn-sm btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
+                                        </div> 
+                                    </td>
+                                </form>    
                             </tr>
                         <?php
                         }
@@ -1901,7 +1913,290 @@
                         </div>
                     </div>
                     <input name="idRecette" type="hidden" value=<?php echo $id?>>
+                    <input type="hidden" name="titleRecipie" value=<?php echo $title ?>>
                     <input type="submit" class="btn btn-md btn-outline-secondary" value="Ajouter une étape">
+                </form>
+                <?php
+            }
+
+            //----------------------------Gestion nutrition start----------
+            function IndexGestionNutrition($active){
+                ?>
+                <!doctype html>
+                    <html lang="fr">
+                        <?php
+                        $title="Gestion de la nutrition";
+                        $this->PageHead($title);
+                        ?>
+                        <body>
+                            <?php
+                            $this->NavBarAdmin($active);
+                            ?>
+                            <main class="flex-shrink-0">
+                                <div class="container administration">
+                                <?php
+                                $this->GestionNutritionBody();
+                                ?>
+                                </div>
+                            </main>
+                            <!-- Bootstrap Bundle with Popper -->
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                            <script src="./scripts/sideMenu.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                        </body>
+                    </html>
+                <?php
+            }
+
+            function GestionNutritionBody(){
+                ?>
+                    <h1>Gérer les ingrédients</h1>
+                    <?php
+                    foreach($this->getIngredientsView() as $row){
+                    $this->IngredientSquareAdmin($row);
+                }
+                ?>
+                <?php
+            }
+
+            function IngredientSquareAdmin($ingredient){
+                $name=$ingredient["NameIngredient"];
+                $imageLink = $ingredient["ImageLinkIngredient"];
+                ?>
+                <div class="ingrediant-square position-relative">
+                    <a class ="stretched-link" href="./gestionIngredient?ingredient=<?php echo $name ?>"></a>
+                    <div class="ingrediant-img-square">
+                        <img src="<?php echo $imageLink ?>" alt="ingredient picture">
+                    </div>
+                    <div class="ingrediant-and-quantity">
+                        <p><?php echo $name ?></p>
+                    </div>
+                </div>
+                <?php
+            }
+            function getIngredientMicronutrientsByNameView($ingredientName){
+                $controller = new controller();
+                $result =$controller->getIngredientMicronutrientsByNameController($ingredientName);
+                return $result;
+            }
+            function getIngredientByNameView($ingredientName){
+                $controller = new controller();
+                $result =$controller->getIngredientByNameController($ingredientName);
+                return $result;
+            }
+
+            function IndexGestionIngredient($ingredientName,$active){
+                ?>
+                <!doctype html>
+                    <html lang="fr">
+                        <?php
+                        $title="Ingrédient: ".$ingredientName;
+                        $this->PageHead($title);
+                        ?>
+                        <body>
+                            <?php
+                            $this->NavBarAdmin($active);
+                            ?>
+                            <main class="flex-shrink-0">
+                                <div class="container administration">
+                                <?php
+                                $this->IngredientInfosForm($ingredientName);
+                                ?>
+                                <hr class="my-4">
+                                <?php
+                                $this->IngredientMicronutrients($ingredientName);
+                                ?>
+                                </div>
+                            </main>
+                            <!-- Bootstrap Bundle with Popper -->
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                            <script src="./scripts/sideMenu.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                        </body>
+                    </html>
+                <?php
+            }
+
+            function IngredientInfosForm($ingredientName){
+                $ingredient=$this->getIngredientByNameView($ingredientName)->fetch();
+                $id=$ingredient["IDIngredient"];
+                $name=$ingredient["NameIngredient"];
+                $saison=$ingredient["Season"];
+                $seasons=explode("/",$saison);
+                $category=$ingredient["CategoryIngredient"];
+                $calories=$ingredient["CaloriesIngredient"];
+                $fat=$ingredient["TotalFatIngredient"];
+                $carbs=$ingredient["TotalCarbsIngredient"];
+                $protien=$ingredient["TotalProtienIngredient"];
+                $IsHealthy=$ingredient["IsHealthy"];
+                ?>
+                <h1>Modifier ingrédient: <?php echo $ingredientName ?></h1>
+                <form method="POST" action="./operations/modifierInfoIngredient.php">
+                    <h3>Informations de l'ingrédient</h3>
+                    <div class="row g-3">
+                        <div class="col-lg-3">
+                            <label class="form-label">Nom</label>
+                            <input name="NameIngredient" type="text" class="form-control" value="<?php echo $name ?>" required>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <legend class="col-form-label col-sm-2 pt-0">Saison</legend>
+                            <div class="col-sm-10">
+                                <fieldset>
+                                    <div class="form-check">
+                                        <input name="favorite_pet[]" class="form-check-input" type="checkbox" value="hivernale" <?php if (in_array("hivernale",$seasons))echo "checked" ?>>
+                                        <label class="form-check-label">
+                                        hivernale
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="favorite_pet[]" class="form-check-input" type="checkbox" value="printaniere" <?php if (in_array("printaniere",$seasons))echo "checked" ?>>
+                                        <label class="form-check-label">
+                                        printaniere
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="favorite_pet[]" class="form-check-input" type="checkbox" value="estivale" <?php if (in_array("estivale",$seasons))echo "checked" ?>>
+                                        <label class="form-check-label">
+                                        estivale
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input name="favorite_pet[]" class="form-check-input" type="checkbox" value="autumnale" <?php if (in_array("autumnale",$seasons))echo "checked" ?>>
+                                        <label class="form-check-label">
+                                        autumnale
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label class="form-label">Catégorie</label>
+                            <select name="CategoryIngredient" class="form-select" aria-label="Default select example">
+                                <option selected><?php echo $category ?></option>
+                                <option value="vegetable">vegetable</option>
+                                <option value="fruit">fruit</option>
+                                <option value="meat">meat</option>
+                                <option value="spice">spice</option>
+                                <option value="fat">fat</option>
+                                <option value="legumes">legumes</option>
+                                <option value="grain">grain</option>
+                                <option value="dairy">dairy</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-check">
+                                <p>Healthy?</p>
+                                <input name="IsHealthy" class="form-check-input" type="radio" value=1 <?php if ($IsHealthy==1) echo " checked "?> >
+                                <label class="form-check-label">
+                                Oui
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input name="IsHealthy" class="form-check-input" type="radio" value=0 <?php if ($IsHealthy==0) echo " checked "?>>
+                                <label class="form-check-label">
+                                Non
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row gy-3" style="margin-top:2%;">
+                        <div class="col-lg-3">
+                            <label class="form-label">Calories</label>
+                            <input name="CaloriesIngredient" type="number" class="form-control" value=<?php echo $calories ?> required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Glucides</label>
+                            <input name="CarbsIngredient" type="number" class="form-control" value=<?php echo $carbs ?> required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Lipides</label>
+                            <input name="FatsIngredient" type="number" class="form-control" value=<?php echo $fat ?> required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Protéines</label>
+                            <input name="ProtienIngredient" type="number" class="form-control" value=<?php echo $protien ?> required>
+                        </div>
+                    </div>
+                    <input name="IDIngredient" type="hidden" value=<?php echo $id ?>>
+                    <input style="margin-top:2%" class="btn btn-primary btn-md" value="Modifier l'ingrédient" type="submit">
+                </form>
+                <?php
+            }
+
+            function getMicronutrientByIDView($id){
+                $controller = new controller();
+                $result =$controller->getMicronutrientByIDController($id); 
+                return $result;
+            }
+
+            function IngredientMicronutrients($ingredientName){
+                ?>
+                <h3>Vitamines et minéraux</h3>
+                <table class="table table-hover table-bordered " style="width: 60%;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">% de la VJR</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $i=1;
+                        foreach($this->getIngredientMicronutrientsByNameView($ingredientName) as $row){
+                            $micronutrient=$this->getMicronutrientByIDView($row["IDMicronutrient"])->fetch();
+                        ?>
+                            <tr>
+                                <form method="POST" action="./operations/modifyMicronutrientInIngredient.php">
+                                    <td><?php echo $i?></td>
+                                    <td><?php echo $micronutrient["NameMicronutrient"]?></td>
+                                    <td><?php echo $micronutrient["Type"]?></td>
+                                    <td style="width: 20%;"><input name="DailyValue" type="number" class="form-control" value=<?php echo $row["DailyValue"]?>></td>
+                                    <td style="width: 30%;">
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <input type="hidden" name="IDIngredient" value=<?php echo $row["IDIngredient"]?>>
+                                                <input type="hidden" name="IDMicronutrient" value=<?php echo $row["IDMicronutrient"]?>>
+                                                <input type="hidden" name="nameIngredient" value=<?php echo $ingredientName?>>
+                                                <input type="submit" class="btn btn-warning" value="Modifier">
+                                                <a href="./operations/deleteMicronutrientFromIngredient?IDIngredient=<?php echo $row["IDIngredient"]?>&IDMicronutrient=<?php echo $row["IDMicronutrient"]?>&ingredient=<?php echo $ingredientName?>" type="button" class="btn btn-sm btn-danger">Supprimer<i class="fa-solid fa-trash-can action-button"></i></a>
+                                        </div> 
+                                    </td>
+                                </form>    
+                            </tr>
+                        <?php
+                        $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <form method="POST" action="./operations/addMicronutrient.php">
+                    <div class="row gy-3">
+                        <h5>Ajouter un minéral/vitamine</h5>
+                        <div class="col-lg-2">
+                            <label class="form-label">Nom</label>
+                            <input name="micronutrientName" type="text" class="form-control" required>
+                        </div>
+                        <div class="col-lg-2">
+                        <label class="form-label">Type</label>
+                            <select name="micronutrientType" class="form-select" aria-label="Default select example">
+                                <option selected>Choisir un type</option>
+                                <option value="minerale">Minérale</option>
+                                <option value="vitamine">Vitamine</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class="form-label">% du VJR</label><br>
+                            <input name="percentage" type="number" class="form-control"></input>
+                        </div>
+                    </div>
+                    <input name="nameIngredient" type="hidden" value=<?php echo $ingredientName?>>
+                    <input style="margin-top:2%" type="submit" class="btn btn-md btn-outline-secondary" value="Ajouter le micronutrément">
                 </form>
                 <?php
             }

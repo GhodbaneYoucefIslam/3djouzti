@@ -86,8 +86,14 @@ h1{
 }
 
 #buttonHolder i{
-    margin-left: 10px;
+    margin-left: 20px;
 }
+
+/* .category-scoller{
+    padding: 10%;
+    overflow-x: scroll;
+    white-space: nowrap;
+} */
 
 /*pied de page*/
 

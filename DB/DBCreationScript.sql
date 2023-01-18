@@ -161,3 +161,14 @@ CREATE TABLE IF NOT EXISTS `Diaporama`(
     `IDNewsOrRecipie` VARCHAR(100) NOT NULL
 );
 
+
+--adding imageLinks to recipie and ingredient
+ALTER TABLE `Recipie`
+ADD `ImageLinkRecipie` VARCHAR(100);
+
+UPDATE `Recipie` SET `ImageLinkRecipie` = CONCAT("./DB/images/recipies/",`TitleRecipie`,".jpg");
+
+ALTER TABLE `Ingredient`
+ADD `ImageLinkIngredient` VARCHAR(100);
+
+UPDATE `Ingredient` SET `ImageLinkIngredient` = CONCAT("./DB/images/ingredients/",`NameIngredient`,".webp");

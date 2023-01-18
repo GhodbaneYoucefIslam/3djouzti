@@ -38,10 +38,15 @@
             $result = $model->getRecipiesByIngredientListModel($ingredientNames);
             return $result;
         }
-
-        public function getIngredientByNameController($Name){
+        public function getIngredientMicronutrientsByNameController($Name){
             $model = new model();
-            $result = $model->getIngredientByNameModel($Name);
+            $result = $model->getIngredientMicronutrientsByNameModel($Name);
+            return $result;
+        }
+
+        public function getIngredientByNameController($ingredientName){
+            $model = new model();
+            $result = $model->getIngredientByNameModel($ingredientName);
             return $result;
         }
 
@@ -152,6 +157,36 @@
         public function modifyIngredientInRecipieController($IDRecipie,$IDIngredient,$quantity,$unit){
             $model = new model();
             $result = $model->modifyIngredientInRecipieModel($IDRecipie,$IDIngredient,$quantity,$unit);
+            return $result;
+        }
+
+        public function modifyStepInRecipieController($IDRecipie,$IDStep,$description,$order){
+            $model = new model();
+            $result = $model->modifyStepInRecipieModel($IDRecipie,$IDStep,$description,$order);
+            return $result;
+        }
+
+        public function modifyIngredientController($IDIngredient,$NameIngredient,$Season,$CategoryIngredient,$IsHealthy,$CaloriesIngredient,$FatsIngredient,$CarbsIngredient,$ProtienIngredient){
+            $model = new model();
+            $result = $model->modifyIngredientModel($IDIngredient,$NameIngredient,$Season,$CategoryIngredient,$IsHealthy,$CaloriesIngredient,$FatsIngredient,$CarbsIngredient,$ProtienIngredient);
+            return $result;
+        }
+
+        public function addMicronutrientController($micronutrientName,$type,$percentage,$NameIngredient){
+            $model = new model();
+            $result = $model->addMicronutrientModel($micronutrientName,$type,$percentage,$NameIngredient);
+            return $result;
+        }
+
+        public function modifyMicronutrientInIngredientController($idIngredient,$idMicronutrient,$percentage){
+            $model = new model();
+            $result = $model->modifyMicronutrientInIngredientModel($idIngredient,$idMicronutrient,$percentage);
+            return $result;
+        }
+
+        public function deleteMicronutrientFromIngredientController($IDIngredient,$IDMicronutrient){
+            $model = new model();
+            $result = $model->deleteMicronutrientFromIngredientModel($IDIngredient,$IDMicronutrient);
             return $result;
         }
     }

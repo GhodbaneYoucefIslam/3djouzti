@@ -1,12 +1,13 @@
 <?php
 require_once("./../controller.php");
-$idRecipie=$_POST["idRecette"];
-$order=$_POST["order"];
+$IDRecipie=$_POST["IDRecipie"];
+$IDStep=$_POST["IDStep"];
 $description=$_POST["descriptionStep"];
+$order=$_POST["order"];
 
 $titleRecipie=$_POST["titleRecipie"];
 
-$controller=new controller();
-$controller->addStepToRecipieController($idRecipie,$order,$description);
+$controller= new controller();
+$controller->modifyStepInRecipieController($IDRecipie,$IDStep,$description,$order);
 header("location:./../modifierRecette.php?titleRecipie=".$titleRecipie);
 ?>
